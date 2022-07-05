@@ -6,11 +6,11 @@ DocMeta.setdocmeta!(RandomParticles, :DocTestSetup, :(using RandomParticles); re
 makedocs(;
     modules=[RandomParticles],
     authors="Gabriel Wu <wuzihua@pku.edu.cn> and contributors",
-    repo="https://github.com/lucifer1004/RandomParticles.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/JuliaRemoteSensing/RandomParticles.jl/blob/{commit}{path}#{line}",
     sitename="RandomParticles.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://lucifer1004.github.io/RandomParticles.jl",
+        canonical="https://JuliaRemoteSensing.github.io/RandomParticles.jl",
         edit_link="main",
         assets=String[],
     ),
@@ -20,6 +20,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/lucifer1004/RandomParticles.jl",
+    repo="github.com/JuliaRemoteSensing/RandomParticles.jl",
     devbranch="main",
 )

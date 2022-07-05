@@ -4,7 +4,7 @@ CurrentModule = RandomParticles
 
 # RandomParticles
 
-Documentation for [RandomParticles](https://github.com/lucifer1004/RandomParticles.jl).
+Documentation for [RandomParticles](https://github.com/JuliaRemoteSensing/RandomParticles.jl).
 
 ```@index
 ```
