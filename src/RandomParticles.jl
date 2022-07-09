@@ -1,7 +1,6 @@
 module RandomParticles
 
 using GeometryBasics: Point3
-using GLMakie: meshscatter
 using Libdl: dlopen, dlclose, dlsym
 using LinearAlgebra: norm
 using Random: AbstractRNG, GLOBAL_RNG
