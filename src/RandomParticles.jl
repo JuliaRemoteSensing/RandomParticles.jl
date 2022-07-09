@@ -1,6 +1,7 @@
 module RandomParticles
 
 using GeometryBasics: Point3
+using GLMakie: meshscatter
 using Libdl: dlopen, dlclose, dlsym
 using LinearAlgebra: norm
 using Random: AbstractRNG, GLOBAL_RNG
@@ -9,6 +10,7 @@ using StructArrays: StructArray
 include("region.jl")
 include("particle.jl")
 include("strategy.jl")
+include("utils.jl")
 include("MSTM_wrapper.jl")
 
 rand_point(rng::AbstractRNG=GLOBAL_RNG) = 2.0 .* rand(rng, Point3) .- 1.0

@@ -1,19 +1,21 @@
 Base.@kwdef struct MSTMSampling <: AbstractStrategy
     max_collisions_per_sphere::Int32 = 3
     max_number_time_steps::Int32 = 10000
-    periodic_boundary_conditions::Vector{Bool} = fill(false, 3)
 end
 
 const LIBMSTM = joinpath(@__DIR__, "..", "shared", "librsgen.so")
 
 mstmshape(::SphereRegion) = 2
 mstmdim(sph::SphereRegion) = fill(sph.r, 3)
+mstmpc(::SphereRegion) = fill(false, 3)
 
 mstmshape(::CylinderRegion) = 1
 mstmdim(cyl::CylinderRegion) = [cyl.r, cyl.r, cyl.h]
+mstmpc(cyl::CylinderRegion) = [false, false, cyl.periodic]
 
 mstmshape(::BoxRegion) = 0
 mstmdim(box::BoxRegion) = [box.x, box.y, box.z]
+mstmpc(box::BoxRegion) = vcat(box.periodic...)
 
 function mstmpsdsamp(σ, rmax, n::Integer)
     radius = Float64[]
@@ -51,7 +53,7 @@ function sample(region::AbstractRegion, radius::AbstractVector, strategy::MSTMSa
         _setglobal(:__random_sphere_configuration_MOD_target_shape, Int32, 1, mstmshape(region))
         _setglobal(:__random_sphere_configuration_MOD_target_dimensions, Float64, 3, mstmdim(region))
         _setglobal(:__random_sphere_configuration_MOD_max_collisions_per_sphere, Int32, 1, strategy.max_collisions_per_sphere)
-        _setglobal(:__random_sphere_configuration_MOD_periodic_bc, Int32, 3, strategy.periodic_boundary_conditions)
+        _setglobal(:__random_sphere_configuration_MOD_periodic_bc, Int32, 3, mstmpc(region))
 
         status = Ref{Int32}()
 
