@@ -3,7 +3,15 @@ Base.@kwdef struct MSTMSampling <: AbstractStrategy
     max_number_time_steps::Int32 = 10000
 end
 
-const LIBMSTM = joinpath(@__DIR__, "..", "shared", "librsgen.so")
+librsgen = if Sys.iswindows()
+    "librsgen.dll"
+elseif Sys.islinux()
+    "librsgen.so"
+else
+    "librsgen.dylib"
+end
+
+const LIBMSTM = joinpath(@__DIR__, "..", "shared", librsgen)
 
 mstmshape(::SphereRegion) = 2
 mstmdim(sph::SphereRegion) = fill(sph.r, 3)

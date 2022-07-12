@@ -4,4 +4,6 @@
 /docs/build/
 *.mod
 *.so
+*.dll
+*.dylib
 *.log
